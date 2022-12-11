@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Pokémon Generator</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="assets/images/pokemon-logo.png">
+            <h1>Gerador de pokémon aleatorio</h1>
+        </div>
+    </header>
+    <main>
+        <div class="main-settings">
+            <label for="party-lenght">Quantidade:</label>
+            <select name="party lenght" id="party-lenght">
+                <option value="1" se>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <label for="type">Tipo:</label>
+            <select name="type" id="type">
+                <option value="all">All Types</option>
+                <option value="bug">Bug</option>
+                <option value="dark">Dark</option>
+                <option value="dragon">Dragon</option>
+                <option value="electric">Electric</option>
+                <option value="fairy">Fairy</option>
+                <option value="fighting">Fighting</option>
+                <option value="fire">Fire</option>
+                <option value="flying">Flying</option>
+                <option value="ghost">Ghost</option>
+                <option value="grass">Grass</option>
+                <option value="ground">Ground</option>
+                <option value="ice">Ice</option>
+                <option value="normal">Normal</option>
+                <option value="poison">Poison</option>
+                <option value="psychic">Psychic</option>
+                <option value="rock">Rock</option>
+                <option value="steel">Steel</option>
+                <option value="water">Water</option>
+            </select>
+            <button onclick="randomPokemon()">Randomizar</button>
+        </div>
+        <div class="main-container"></div>
+    </main>
+    
+    <script type="text/javascript">
+        const randomNumber = () => {
+            return Math.floor(Math.random() * 905);
+        }
+        const fetchPokemon = () => {
+        const url = `https://pokeapi.co/api/v2/pokemon/${randomNumber()}`
+         fetch(url)
+            .then(response => response.json())
+            .then(pokemon => {
+                $('.main-container').append('<div class="pokemon-image"><img src=' + pokemon.sprites.front_default + '>' + '<p>' + pokemon.name + '</p></div>');
+            })
+        }
+        const randomPokemon = () => {
+        for (i = 0; i < $( "#party-lenght").val(); i++){
+            $('.pokemon-image').remove();
+        fetchPokemon();
+    }
+}
+    </script>
+</body>
+</html>
